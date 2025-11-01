@@ -38,4 +38,45 @@ class Film {
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    // Új film létrehozása, visszaadja az új id-t vagy 0-t
+    public function create(array $data): int {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO movies (title, studio_id, director_id, category_id, description)
+            VALUES (:title, :studio_id, :director_id, :category_id, :description)
+        ");
+        $stmt->execute([
+            'title' => $data['title'] ?? null,
+//            'year' => $data['year'] ?? null,
+            'studio_id' => $data['studio_id'] ?? null,
+            'director_id' => $data['director_id'] ?? null,
+            'category_id' => $data['category_id'] ?? null,
+            'description' => $data['description'] ?? null,
+        ]);
+        return (int) $this->pdo->lastInsertId();
+    }
+
+    // Film frissítése
+    public function update(int $id, array $data): bool {
+        $stmt = $this->pdo->prepare("
+            UPDATE movies SET title = :title, year = :year, studio_id = :studio_id,
+            director_id = :director_id, category_id = :category_id, description = :description
+            WHERE id = :id
+        ");
+        return $stmt->execute([
+            'title' => $data['title'] ?? null,
+            //'year' => $data['year'] ?? null,
+            'studio_id' => $data['studio_id'] ?? null,
+            'director_id' => $data['director_id'] ?? null,
+            'category_id' => $data['category_id'] ?? null,
+            'description' => $data['description'] ?? null,
+            'id' => $id,
+        ]);
+    }
+
+    // Film törlése
+    public function delete(int $id): bool {
+        $stmt = $this->pdo->prepare("DELETE FROM movies WHERE id = :id");
+        return $stmt->execute(['id' => $id]);
+    }
 }

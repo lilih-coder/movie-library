@@ -1,0 +1,382 @@
+/* style.css
+      Modern neutral UI for tables and common elements
+      - System font stack, CSS variables, light/dark mode
+      - Accessible focus states, reduced-motion support
+      - Responsive table wrapper with sticky headers and zebra rows
+*/
+
+/* 1) Reset / base */
+:root{
+  --bg: #fafafa;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --text: #111827;
+  --accent: #2563eb;
+  --accent-600: #1d4ed8;
+  --surface-border: rgba(15,23,42,0.06);
+  --success: #10b981;
+  --danger: #ef4444;
+  --radius: 10px;
+  --glass: rgba(255,255,255,0.6);
+  --shadow-sm: 0 1px 2px rgba(16,24,40,0.04);
+  --shadow-md: 0 6px 20px rgba(16,24,40,0.08);
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --max-width: 1200px;
+  --code-bg: rgba(0,0,0,0.04);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light dark;
+  --transition-fast: 180ms cubic-bezier(.2,.8,.2,1);
+}
+
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
+
+html,body{
+  height:100%;
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+  font-size:16px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *{
+       animation-duration: 0.001ms !important;
+       transition-duration: 0.001ms !important;
+       scroll-behavior: auto !important;
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark){
+  :root{
+       --bg: #0b1220;
+       --card: #071025;
+       --muted: #94a3b8;
+       --text: #e6eef8;
+       --accent: #60a5fa;
+       --accent-600: #3b82f6;
+       --surface-border: rgba(255,255,255,0.04);
+       --glass: rgba(255,255,255,0.03);
+       --code-bg: rgba(255,255,255,0.03);
+       --shadow-sm: none;
+       --shadow-md: none;
+  }
+}
+
+/* Layout helpers */
+.container{
+  max-width:var(--max-width);
+  margin:24px auto;
+  padding:0 20px;
+}
+
+/* Typography */
+h1,h2,h3,h4,h5{
+  margin:0 0 12px 0;
+  font-weight:var(--fw-medium);
+  color:var(--text);
+}
+
+p,span,label{
+  color:var(--muted);
+  margin:0 0 12px 0;
+  font-weight:var(--fw-regular);
+}
+
+/* Cards and surface */
+.card{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-md);
+  border:1px solid var(--surface-border);
+  padding:16px;
+  overflow:hidden;
+}
+
+/* Buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid transparent;
+  background:var(--accent);
+  color:#fff;
+  font-weight:var(--fw-medium);
+  cursor:pointer;
+  transition:all var(--transition-fast);
+  text-decoration:none;
+  user-select:none;
+}
+.btn:hover{ transform:translateY(-1px); box-shadow:var(--shadow-sm); background:var(--accent-600); }
+.btn:active{ transform:translateY(0); }
+.btn-secondary{
+  background:transparent;
+  color:var(--text);
+  border-color:var(--surface-border);
+}
+.btn-danger{ background:var(--danger); }
+.btn-ghost{
+  background:transparent;
+  color:var(--muted);
+  border:1px dashed var(--surface-border);
+}
+
+/* Form controls */
+.input, textarea, select{
+  width:100%;
+  padding:10px 12px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius:8px;
+  border:1px solid var(--surface-border);
+  color:var(--text);
+  outline:none;
+  transition:border var(--transition-fast), box-shadow var(--transition-fast);
+  font-size:14px;
+}
+textarea{ min-height:96px; resize:vertical; }
+.input:focus, textarea:focus, select:focus{
+  border-color:var(--accent);
+  box-shadow:0 6px 20px rgba(37,99,235,0.08);
+}
+
+/* Utility rows */
+.row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.col{ flex:1 1 0; min-width:0; }
+
+/* Small badges */
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:var(--glass);
+  color:var(--muted);
+  font-weight:var(--fw-medium);
+  font-size:13px;
+}
+
+/* Code / pre */
+code, pre{
+  background:var(--code-bg);
+  color:inherit;
+  padding:6px 8px;
+  border-radius:6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size:13px;
+  overflow:auto;
+}
+
+/* 2) Table styles - modern, responsive, accessible */
+.table-responsive{
+  width:100%;
+  overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  border-radius:calc(var(--radius) + 2px);
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+}
+
+/* Table base */
+table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  min-width:640px;
+  font-size:14px;
+  background:transparent;
+}
+
+/* Card-like table */
+.table{
+  border:1px solid var(--surface-border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+
+/* Header */
+.table thead th{
+  position:sticky;
+  top:0;
+  background:linear-gradient(180deg,var(--card),rgba(0,0,0,0));
+  color:var(--muted);
+  font-weight:var(--fw-medium);
+  text-align:left;
+  padding:12px 16px;
+  font-size:13px;
+  border-bottom:1px solid var(--surface-border);
+  backdrop-filter: blur(6px);
+  z-index:2;
+  white-space:nowrap;
+}
+
+/* Body cells */
+.table tbody td{
+  padding:12px 16px;
+  border-bottom:1px dashed var(--surface-border);
+  vertical-align:middle;
+  color:var(--text);
+  background:transparent;
+}
+
+/* First / last column rounding for table within container */
+.table tbody tr:first-child td:first-child,
+.table thead tr th:first-child{
+  padding-left:18px;
+}
+.table tbody tr td:last-child,
+.table thead tr th:last-child{
+  padding-right:18px;
+}
+
+/* Row styles */
+.table tbody tr{
+  transition:background var(--transition-fast), transform var(--transition-fast);
+  background:transparent;
+}
+.table tbody tr:hover{
+  background: linear-gradient(90deg, rgba(37,99,235,0.03), transparent);
+  transform: translateY(-1px);
+}
+
+/* Zebra striping (subtle) */
+.table tbody tr:nth-child(2n){
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.01));
+}
+
+/* Compact variant */
+.table--compact tbody td{ padding:8px 12px; font-size:13px; }
+
+/* Action cell alignment */
+.table .actions{
+  display:flex;
+  gap:8px;
+  justify-content:flex-end;
+}
+
+/* Empty state row */
+.table .empty{
+  text-align:center;
+  color:var(--muted);
+  padding:24px;
+}
+
+/* Column sizing helpers */
+.col-id{ width:64px; white-space:nowrap; }
+.col-title{ min-width:240px; }
+.col-actions{ width:140px; }
+
+/* Sort indicator (pure CSS arrow, toggle via class) */
+.sortable{
+  cursor:pointer;
+  user-select:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.sortable .sort-arrow{
+  display:inline-block;
+  width:12px;
+  height:12px;
+  opacity:0.6;
+  transform-origin:center;
+  transition:transform var(--transition-fast), opacity var(--transition-fast);
+}
+.sortable.sort-asc .sort-arrow{ transform:rotate(180deg); opacity:1; }
+.sortable.sort-desc .sort-arrow{ transform:rotate(0deg); opacity:1; }
+
+/* Responsive tweaks */
+@media (max-width:900px){
+  .container{ padding:0 12px; }
+  table{ min-width:720px; }
+}
+
+/* Very small screens, allow stacked display */
+@media (max-width:560px){
+  .table-responsive{ border-radius:8px; }
+  table{ min-width:560px; font-size:13px; }
+}
+
+/* Scrollbar styling (WebKit + Firefox limited) */
+.table-responsive::-webkit-scrollbar{ height:10px; width:10px; }
+.table-responsive::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg, rgba(16,24,40,0.12), rgba(16,24,40,0.08));
+  border-radius:999px;
+}
+.table-responsive::-webkit-scrollbar-track{ background:transparent; }
+
+/* Focus outlines for keyboard users */
+:focus{
+  outline:3px solid rgba(37,99,235,0.12);
+  outline-offset:2px;
+}
+
+/* Small helpers for row meta */
+.meta{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* Tiny chips for status */
+.status{
+  padding:6px 10px;
+  border-radius:999px;
+  font-weight:var(--fw-medium);
+  font-size:12px;
+  display:inline-flex;
+  align-items:center;
+}
+.status.good{ background:rgba(16,185,129,0.12); color:var(--success); }
+.status.warn{ background:rgba(250,204,21,0.08); color:#f59e0b; }
+.status.bad{ background:rgba(239,68,68,0.08); color:var(--danger); }
+
+/* Footer / summary row */
+.table tfoot td{
+  padding:12px 16px;
+  font-weight:var(--fw-medium);
+  color:var(--muted);
+  border-top:1px solid var(--surface-border);
+  background:linear-gradient(180deg, rgba(0,0,0,0.01), transparent);
+}
+
+/* Accessibility: make sure focusable controls within table are visible */
+.table a, .table button{
+  color:inherit;
+}
+.table a:focus, .table button:focus{
+  outline:2px dashed rgba(37,99,235,0.2);
+  outline-offset:2px;
+}
+
+/* Small utilities */
+.text-muted{ color:var(--muted); }
+.text-small{ font-size:13px; }
+.flex{ display:flex; align-items:center; gap:8px; }
+.center{ display:flex; align-items:center; justify-content:center; }
+
+/* Example helper: empty-screen */
+.empty-screen{
+  border:1px dashed var(--surface-border);
+  border-radius:var(--radius);
+  padding:32px;
+  text-align:center;
+  color:var(--muted);
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+}
+
+/* End of file */

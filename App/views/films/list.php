@@ -19,5 +19,4 @@
     </tr>
     <?php endforeach; ?>
 </table>
-
 <?php require __DIR__ . '/../layouts/footer.php'; ?>

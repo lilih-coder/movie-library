@@ -3,4 +3,19 @@ RewriteEngine On
 # Redirect all requests to index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
+RewriteRule ^ /movie-library/Public/index.php [QSA,L]
+
+
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Ha létezik a fájl vagy a könyvtár, szolgálja ki azt
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Minden más kérést a Public/index.php-hez küldünk
+    RewriteRule ^(.*)$ /Public/index.php [L,QSA]
+</IfModule>

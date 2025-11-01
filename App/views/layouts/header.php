@@ -3,6 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Filmek</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>Public/CSS/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
