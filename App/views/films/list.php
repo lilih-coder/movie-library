@@ -55,7 +55,8 @@
             <td><?= htmlspecialchars($film['category_name']) ?></td>
             <td><?= htmlspecialchars($film['rating_age']) ?></td>
             <td><?= htmlspecialchars($film['language']) ?></td>
-            <td><?= htmlspecialchars($film['subtitle']) ?></td>
+            <!--<td><?= htmlspecialchars($film['subtitle']) ?></td>-->
+            <td style="text-align:center;"> - </td>
             <td>
                 <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>">Megtekintés</a> |
                 <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/edit">Szerkesztés</a> |
