@@ -61,7 +61,7 @@
                 <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>">Megtekintés</a> |
                 <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/edit">Szerkesztés</a> |
                 <form method="post" action="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/delete" style="display:inline;">
-                    <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd ezt a filmet?');">Törlés</button>
+                    <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd ezt a filmet?');">🗑️</button>
                 </form>
             </td>
         </tr>  
