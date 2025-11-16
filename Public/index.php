@@ -36,7 +36,24 @@ if ($uri === '/' || $uri === '/index.php') {
 }
 
 if ($method === 'GET' && $uri === '/films') {
-    $controller->list();
+    $filters = [
+            'director_id' => !isset($_GET['director_id']) || 
+                $_GET['director_id'] === '' ?
+                null : 
+                $_GET['director_id'],
+            'category_id' => 
+                !isset($_GET['category_id']) || 
+                $_GET['category_id'] === '' ?
+                null : 
+                $_GET['category_id'],
+            'studio_id'   => 
+                !isset($_GET['studio_id']) || 
+                $_GET['studio_id'] === '' ?
+                null : 
+                $_GET['studio_id'],
+        ];
+
+    $controller->list($filters);
     exit;
 }
 
