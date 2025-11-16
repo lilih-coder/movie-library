@@ -31,34 +31,40 @@
         </select>  
         <button type="submit">Szűrés</button>
     </form>
-<table border="1" cellpadding="5">
-    <tr>
-        <th>Cím</th>
-        <th>Stúdió</th>
-        <th>Rendező</th>
-        <th>Kategória</th>
-        <th>Korhatár</th>
-        <th>Nyelv</th>
-        <th>Felirat</th>
-        <th>Műveletek</th>
-    </tr>
+<table border="1" cellpadding="5" class="card">
+    <div class="table-header card">
+        <div class="header">
+            <tr>
+                <th class="cell">Cím</th>
+                <th class="cell">Stúdió</th>
+                <th class="cell">Rendező</th>
+                <th class="cell">Kategória</th>
+                <th class="cell">Korhatár</th>
+                <th class="cell">Nyelv</th>
+                <th>Felirat</th>
+                <th>Műveletek</th>
+            </tr>
+        </div>
+    </div>
     <?php foreach($films as $film): ?>
-    <tr>
-        <td><?= htmlspecialchars($film['title']) ?></td>
-        <td><?= htmlspecialchars($film['studio_name']) ?></td>
-        <td><?= htmlspecialchars($film['director_name']) ?></td>
-        <td><?= htmlspecialchars($film['category_name']) ?></td>
-        <td><?= htmlspecialchars($film['rating_age']) ?></td>
-        <td><?= htmlspecialchars($film['language']) ?></td>
-        <td><?= htmlspecialchars($film['subtitle']) ?></td>
-        <td>
-            <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>">Megtekintés</a> |
-            <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/edit">Szerkesztés</a> |
-            <form method="post" action="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/delete" style="display:inline;">
-                <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd ezt a filmet?');">Törlés</button>
-            </form>
-        </td>
-    </tr>
+    <div class="table-body">       
+        <tr>
+            <td><?= htmlspecialchars($film['title']) ?></td>
+            <td><?= htmlspecialchars($film['studio_name']) ?></td>
+            <td><?= htmlspecialchars($film['director_name']) ?></td>
+            <td><?= htmlspecialchars($film['category_name']) ?></td>
+            <td><?= htmlspecialchars($film['rating_age']) ?></td>
+            <td><?= htmlspecialchars($film['language']) ?></td>
+            <td><?= htmlspecialchars($film['subtitle']) ?></td>
+            <td>
+                <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>">Megtekintés</a> |
+                <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/edit">Szerkesztés</a> |
+                <form method="post" action="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/delete" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd ezt a filmet?');">Törlés</button>
+                </form>
+            </td>
+        </tr>  
+    </div>
     <?php endforeach; ?>
 </table>
 <?php require __DIR__ . '/../layouts/footer.php'; ?>

@@ -1,0 +1,216 @@
+/* =========================
+   Alap body és tipográfia
+   ========================= */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* =========================
+   Konténerek
+   ========================= */
+.container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* =========================
+   Kártyák / dobozok
+   ========================= */
+.card {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.8);
+}
+
+/* =========================
+   Címek
+   ========================= */
+h1 {
+    color: #e50914; /* Netflix piros */
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.7), 
+        0 0 10px rgba(229,9,20,0.6);
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+
+h1:hover {
+    color: #ff1a36;
+    text-shadow: 
+        2px 2px 6px rgba(0,0,0,0.8), 
+        0 0 15px rgba(255,26,54,0.8);
+    transform: scale(1.05);
+}
+
+h2, h3 {
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+/* =========================
+   Gombok
+   ========================= */
+button {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #ff1a36;
+    box-shadow: 0 0 8px #e50914, 0 0 12px #ff1a36;
+    transform: scale(1.05);
+}
+
+/* =========================
+   Táblázatok
+   ========================= */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 15px;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+}
+
+th {
+    background-color: #2c2c2c;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: #1a1a1a;
+}
+
+tr:hover {
+    background-color: #333333;
+}
+
+/* =========================
+   Linkek
+   ========================= */
+a {
+    color: #e50914; /* Netflix piros */
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+/* Hover effekt: glow és kis animáció */
+a:hover {
+    color: #ff1a36;
+    text-shadow: 
+        0 0 5px #e50914,
+        0 0 10px #e50914,
+        0 0 15px #ff1a36,
+        0 0 20px #ff1a36;
+    transform: scale(1.05);
+}
+
+/* =========================
+   Input mezők
+   ========================= */
+input, select {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    margin-right: 10px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #e50914;
+    box-shadow: 0 0 5px #e50914;
+}
+
+
+/*=========================
+   Egyedi osztályok
+   ========================= 
+   */
+.title {
+    color: #e50914; /* Netflix piros */
+    font-size: 2.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 
+        2px 2px 4px rgba(0,0,0,0.7), 
+        0 0 10px rgba(229,9,20,0.6);
+    margin-bottom: 25px;
+    transition: 0.3s;
+}
+
+/* Sorok kártya stílusban */
+.row.card {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.row.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(229,9,20,0.8);
+    background-color: #292929;
+}
+
+/* Cellák */
+.cell {
+    flex: 1 1 12%;
+    padding: 8px;
+    color: #e0e0e0;
+    font-size: 14px;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+/* Hover a cellákon */
+.row.card:hover .cell {
+    color: #ff1a36;
+    text-shadow: 0 0 5px #e50914, 0 0 10px #ff1a36;
+}
+
+/* Header */
+.header .cell {
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
