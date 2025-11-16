@@ -38,6 +38,8 @@
         <th>Rendező</th>
         <th>Kategória</th>
         <th>Korhatár</th>
+        <th>Nyelv</th>
+        <th>Felirat</th>
         <th>Műveletek</th>
     </tr>
     <?php foreach($films as $film): ?>
@@ -47,6 +49,8 @@
         <td><?= htmlspecialchars($film['director_name']) ?></td>
         <td><?= htmlspecialchars($film['category_name']) ?></td>
         <td><?= htmlspecialchars($film['rating_age']) ?></td>
+        <td><?= htmlspecialchars($film['language']) ?></td>
+        <td><?= htmlspecialchars($film['subtitle']) ?></td>
         <td>
             <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>">Megtekintés</a> |
             <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/edit">Szerkesztés</a> |

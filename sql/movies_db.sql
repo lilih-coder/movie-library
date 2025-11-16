@@ -78,6 +78,8 @@ CREATE TABLE ratings (
     FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE
 );
 
+
+
 -- ===============================
 -- 4️⃣ ALAPADATOK FELTÖLTÉSE
 -- ===============================
