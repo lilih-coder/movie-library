@@ -1,5 +1,10 @@
 <?php ?>
-<?php require __DIR__ . '/../layouts/header.php'; ?>
+<?php require __DIR__ . '/../layouts/header.php'; 
+use App\Models\Director;
+
+$directorModel = new Director();
+$directors = $directorModel->getAll(); // ezt itt lekérjük, hogy a <select> feltöltődjön
+?>
 <div class="newfilm-container">
     <h1 class="newfilm-title">Új film</h1>
     <form method="post" action="<?php echo BASE_URI; ?>/films/store">
