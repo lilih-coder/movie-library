@@ -75,12 +75,14 @@ class Film {
             'director_id' => $data['director_id'] ?? null,
             'category_id' => $data['category_id'] ?? null,
             'description' => $data['description'] ?? null,
+            'language_id' => $data['language_id'] ?? null,
+            'subtitle' => $data['subtitle'] ?? null,
             'id' => $id,
         ]);
     }
 
     // Film törlése
-    public function delete(int $id): bool {
+    public function delete(int $id): bool { 
         $stmt = $this->pdo->prepare("DELETE FROM movies WHERE id = :id");
         return $stmt->execute(['id' => $id]);
     }
@@ -92,6 +94,11 @@ class Film {
 
     public function getCategories() : array {
         $stmt = $this->pdo->query("SELECT id, name FROM categories ORDER BY name");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getLanguages() : array {
+        $stmt = $this->pdo->query("SELECT id, name FROM languages ORDER BY name");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

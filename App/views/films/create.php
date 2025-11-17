@@ -3,7 +3,20 @@
 use App\Models\Director;
 
 $directorModel = new Director();
-$directors = $directorModel->getAll(); // ezt itt lekérjük, hogy a <select> feltöltődjön
+$directors = $directorModel->getAll(); 
+
+use App\Models\Studio;
+$studioModel = new Studio();
+$studios = $studioModel->getAll(); 
+
+use App\Models\Category;
+$categoryModel = new Category();
+$categories = $categoryModel->getAll();
+
+use App\Models\Language;
+$languageModel = new Language();
+$languages = $languageModel->getAll();
+
 ?>
 <div class="newfilm-container">
     <h1 class="newfilm-title">Új film</h1>
@@ -22,23 +35,43 @@ $directors = $directorModel->getAll(); // ezt itt lekérjük, hogy a <select> fe
                 <?php endforeach; ?>
             </select>
         </label>
-        <!--
         <label>Stúdió:
-            <input name="title" type="text" required>
+            <select name="studio_id" required>
+                <option value="">-- Válassz stúdiót --</option>
+                <?php foreach ($studios as $studio) : ?>
+                    <option value="<?= $studio['id']; ?>"><?= htmlspecialchars($studio['name']); ?></option>
+                <?php endforeach; ?>
+            </select>
         </label>
         <label>Kategória:
-            <input name="title" type="text" required>
+            <select name="category_id" required>
+                <option value="">-- Válassz kategóriát --</option>
+                <?php foreach ($categories as $category) : ?>
+                    <option value="<?= $category['id']; ?>"><?= htmlspecialchars($category['name']); ?></option>
+                <?php endforeach; ?>
+            </select>
         </label>
         <label>Korhatár:
-            <input name="title" type="text" required>
+            <select name="rating_age" required>
+                <option value="">-- Válassz korhatárt --</option>
+                <option value="0">Nincs korhatár</option>
+                <option value="6">6+</option>
+                <option value="12">12+</option>
+                <option value="16">16+</option>
+                <option value="18">18+</option>
+            </select>
         </label>
         <label>Nyelv:
-            <input name="title" type="text" required>
+            <select name="language_id" required>
+                <option value="">-- Válassz nyelvet --</option>
+                <?php foreach ($languages as $language) : ?>
+                    <option value="<?= $language['id']; ?>"><?= htmlspecialchars($language['name']); ?></option>
+                <?php endforeach; ?>
+            </select>
         </label>
         <label>Felirat:
-            <input name="title" type="text" required>
+            <input type="checkbox" name="subtitle" value="1">
         </label>
--->
         <label>Leírás:
             <textarea name="description" rows="5" required></textarea>
         </label>
@@ -137,5 +170,37 @@ $directors = $directorModel->getAll(); // ezt itt lekérjük, hogy a <select> fe
         background-color: #ff1a36;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(229, 9, 20, 0.6);
+    }
+
+    /* SELECT (legördülő) mezők */
+    .newfilm-container select {
+        width: 100%;
+        padding: 10px 12px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: 1px solid #333;
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: border 0.3s, box-shadow 0.3s, background-color 0.3s;
+        appearance: none; /* natív nyíl eltüntetése */
+        background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+    }
+
+    /* Hover */
+    .newfilm-container select:hover {
+        border: 1px solid #444;
+        background-color: #262626;
+    }
+
+    /* Focus */
+    .newfilm-container select:focus {
+        border: 1px solid #e50914;
+        box-shadow: 0 0 8px rgba(229, 9, 20, 0.6);
+        outline: none;
+        background-color: #2e2e2e;
     }
 </style>
