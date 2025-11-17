@@ -44,3 +44,13 @@ class Director{
             return $stmt->execute(['id' => $id]);
       }
 }
+
+/*
+<?php 
+require __DIR__ . '/../layouts/header.php'; 
+use App\Models\Director;
+
+$directorModel = new Director();
+$directors = $directorModel->getAll(); // Ez most egy tömb lesz minden rendezővel
+?>
+*/ 
