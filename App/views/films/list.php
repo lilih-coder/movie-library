@@ -4,33 +4,50 @@
 
 <a href="<?= BASE_URI ?>/films/create">Új film hozzáadása</a>
 
-<form method="get" action="<?= BASE_URI ?>/films" style="margin-top:20px; margin-bottom:20px;">
-    <select name="director_id" id="director_id" class="form-select">
-        <option value="">-- Mind --</option>
-        <?php foreach ($directors as $director) : ?>
-            <option value="<?= $director['id'] ?>" <?= ($filters['director_id'] == $director['id']) ? 'selected' : '' ?>>
-                <?= htmlspecialchars($director['name']) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-    <select name="category_id" id="category_id" class="form-select">
-        <option value="">-- Mind --</option>
-        <?php foreach ($categories as $category) : ?>
-            <option value="<?= $category['id'] ?>" <?= ($filters['category_id'] == $category['id']) ? 'selected' : '' ?>>
-                <?= htmlspecialchars($category['name']) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-    <select name="studio_id" id="studio_id" class="form-select">
-        <option value="">-- Mind --</option>
-        <?php foreach ($studios as $studio) : ?>
-            <option value="<?= $studio['id'] ?>" <?= ($filters['studio_id'] == $studio['id']) ? 'selected' : '' ?>>
-                <?= htmlspecialchars($studio['name']) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-    <button type="submit">Szűrés</button>
+<form method="get" action="<?= BASE_URI ?>/films" style="margin-top:20px; margin-bottom:20px; display:flex; gap:15px; align-items:flex-end; flex-wrap:wrap;">
+
+    <div>
+        <label for="director_id" style="font-weight:bold; display:block; margin-bottom:5px;">Rendező:</label>
+        <select name="director_id" id="director_id" class="form-select">
+            <option value="">-- Mind --</option>
+            <?php foreach ($directors as $director) : ?>
+                <option value="<?= $director['id'] ?>" <?= ($filters['director_id'] == $director['id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($director['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+    <div>
+        <label for="category_id" style="font-weight:bold; display:block; margin-bottom:5px;">Kategória:</label>
+        <select name="category_id" id="category_id" class="form-select">
+            <option value="">-- Mind --</option>
+            <?php foreach ($categories as $category) : ?>
+                <option value="<?= $category['id'] ?>" <?= ($filters['category_id'] == $category['id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($category['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+    <div>
+        <label for="studio_id" style="font-weight:bold; display:block; margin-bottom:5px;">Stúdió:</label>
+        <select name="studio_id" id="studio_id" class="form-select">
+            <option value="">-- Mind --</option>
+            <?php foreach ($studios as $studio) : ?>
+                <option value="<?= $studio['id'] ?>" <?= ($filters['studio_id'] == $studio['id']) ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($studio['name']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
+    <div>
+        <button type="submit" style="padding:8px 16px; margin-top:20px;">Szűrés</button>
+    </div>
+
 </form>
+
 <table border="1" cellpadding="5" class="card">
     <div class="table-header card">
         <div>
@@ -44,6 +61,7 @@
                 <th class="cell">Felirat</th>
                 <th class="cell">Műveletek</th>
                 <th class="cell">Értékelés</th>
+                <th class="cell">Poszter</th>
             </tr>
         </div>
     </div>
@@ -74,6 +92,13 @@
                         <span data-value="4">★</span>
                         <span data-value="5">★</span>
                     </div>
+                </td>
+                <td>
+                    <?php if (!empty($film['poster_url'])) : ?>
+                        <img src="<?= htmlspecialchars($film['poster_url']) ?>" alt="Poszter" style="max-width:100px; max-height:150px;">
+                    <?php else : ?>
+                        N/A
+                    <?php endif; ?>
                 </td>
                 <script>
                     const stars = document.querySelectorAll('.stars span');
