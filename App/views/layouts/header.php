@@ -4,6 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Filmek</title>
-    <link rel="stylesheet" href="Public/css/teszt.css">
+    <link rel="stylesheet" href="../css/teszt.css">
 </head>
 <body>

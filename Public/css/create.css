@@ -1,0 +1,89 @@
+/* ===== Alap body stílus ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ===== Form konténer (kártya) ===== */
+.form-container.card {
+    background: #1e1e1e;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    width: 400px;
+    max-width: 90%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.8);
+}
+
+/* ===== Cím ===== */
+.form-container .title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #e50914; /* piros kiemelés */
+    margin-bottom: 20px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ===== Label + input / textarea stílus ===== */
+.form-container label {
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.form-container input,
+.form-container textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #333;
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+    border: 1px solid #e50914;
+    box-shadow: 0 0 8px rgba(229,9,20,0.6);
+    outline: none;
+}
+
+/* ===== Gomb stílus ===== */
+.form-container button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #e50914;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.form-container button:hover {
+    background-color: #ff1a36;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(229,9,20,0.6);
+}

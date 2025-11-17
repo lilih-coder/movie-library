@@ -2,38 +2,38 @@
 
 <h1>Filmek listája</h1>
 
-    <a href="<?= BASE_URI ?>/films/create">Új film hozzáadása</a>
+<a href="<?= BASE_URI ?>/films/create">Új film hozzáadása</a>
 
-    <form method="get" action="<?= BASE_URI ?>/films" style="margin-top:20px; margin-bottom:20px;">
-        <select name="director_id" id="director_id" class="form-select">
-            <option value="">-- Mind --</option>
-            <?php foreach ($directors as $director): ?>
-                <option value="<?= $director['id'] ?>" <?= ($filters['director_id'] == $director['id']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($director['name']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        <select name="category_id" id="category_id" class="form-select">
-            <option value="">-- Mind --</option>
-            <?php foreach ($categories as $category): ?>
-                <option value="<?= $category['id'] ?>" <?= ($filters['category_id'] == $category['id']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($category['name']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-        <select name="studio_id" id="studio_id" class="form-select">
-            <option value="">-- Mind --</option>
-            <?php foreach ($studios as $studio): ?>
-                <option value="<?= $studio['id'] ?>" <?= ($filters['studio_id'] == $studio['id']) ? 'selected' : '' ?>>
-                    <?= htmlspecialchars($studio['name']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>  
-        <button type="submit">Szűrés</button>
-    </form>
+<form method="get" action="<?= BASE_URI ?>/films" style="margin-top:20px; margin-bottom:20px;">
+    <select name="director_id" id="director_id" class="form-select">
+        <option value="">-- Mind --</option>
+        <?php foreach ($directors as $director) : ?>
+            <option value="<?= $director['id'] ?>" <?= ($filters['director_id'] == $director['id']) ? 'selected' : '' ?>>
+                <?= htmlspecialchars($director['name']) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <select name="category_id" id="category_id" class="form-select">
+        <option value="">-- Mind --</option>
+        <?php foreach ($categories as $category) : ?>
+            <option value="<?= $category['id'] ?>" <?= ($filters['category_id'] == $category['id']) ? 'selected' : '' ?>>
+                <?= htmlspecialchars($category['name']) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <select name="studio_id" id="studio_id" class="form-select">
+        <option value="">-- Mind --</option>
+        <?php foreach ($studios as $studio) : ?>
+            <option value="<?= $studio['id'] ?>" <?= ($filters['studio_id'] == $studio['id']) ? 'selected' : '' ?>>
+                <?= htmlspecialchars($studio['name']) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <button type="submit">Szűrés</button>
+</form>
 <table border="1" cellpadding="5" class="card">
     <div class="table-header card">
-        <div class="header">
+        <div>
             <tr>
                 <th class="cell">Cím</th>
                 <th class="cell">Stúdió</th>
@@ -41,31 +41,71 @@
                 <th class="cell">Kategória</th>
                 <th class="cell">Korhatár</th>
                 <th class="cell">Nyelv</th>
-                <th>Felirat</th>
-                <th>Műveletek</th>
+                <th class="cell">Felirat</th>
+                <th class="cell">Műveletek</th>
+                <th class="cell">Értékelés</th>
             </tr>
         </div>
     </div>
-    <?php foreach($films as $film): ?>
-    <div class="table-body">       
-        <tr>
-            <td><?= htmlspecialchars($film['title']) ?></td>
-            <td><?= htmlspecialchars($film['studio_name']) ?></td>
-            <td><?= htmlspecialchars($film['director_name']) ?></td>
-            <td><?= htmlspecialchars($film['category_name']) ?></td>
-            <td><?= htmlspecialchars($film['rating_age']) ?></td>
-            <td><?= htmlspecialchars($film['language']) ?></td>
-            <!--<td><?= htmlspecialchars($film['subtitle']) ?></td>-->
-            <td style="text-align:center;"> - </td>
-            <td>
-                <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>">Megtekintés</a> |
-                <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/edit">Szerkesztés</a> |
-                <form method="post" action="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/delete" style="display:inline;">
-                    <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd ezt a filmet?');">🗑️</button>
-                </form>
-            </td>
-        </tr>  
-    </div>
+    <?php foreach ($films as $film) : ?>
+        <div class="table-body">
+            <tr>
+                <td><?= htmlspecialchars($film['title']) ?></td>
+                <td><?= htmlspecialchars($film['studio_name']) ?></td>
+                <td><?= htmlspecialchars($film['director_name']) ?></td>
+                <td><?= htmlspecialchars($film['category_name']) ?></td>
+                <td><?= htmlspecialchars($film['rating_age']) ?></td>
+                <td><?= htmlspecialchars($film['language']) ?></td>
+                <!--<td><?= htmlspecialchars($film['subtitle']) ?></td>-->
+                <td style="text-align:center;"> - </td>
+                <td style="text-align:left;">
+                    <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>">Megtekintés</a>
+                    <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/edit">Szerkesztés</a><br>
+                    <br>
+                    <form method="post" action="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/delete" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Biztosan törölni szeretnéd ezt a filmet?');">Törlés</button>
+                    </form>
+                </td>
+                <td>
+                    <div class="stars">
+                        <span data-value="1">★</span>
+                        <span data-value="2">★</span>
+                        <span data-value="3">★</span>
+                        <span data-value="4">★</span>
+                        <span data-value="5">★</span>
+                    </div>
+                </td>
+                <script>
+                    const stars = document.querySelectorAll('.stars span');
+
+                    stars.forEach(star => {
+                        star.addEventListener('mouseover', () => {
+                            highlight(star.dataset.value);
+                        });
+
+                        star.addEventListener('mouseout', () => {
+                            highlight(document.querySelector('.stars').dataset.selected || 0);
+                        });
+
+                        star.addEventListener('click', () => {
+                            document.querySelector('.stars').dataset.selected = star.dataset.value;
+                            highlight(star.dataset.value);
+                        });
+                    });
+
+                    function highlight(value) {
+                        stars.forEach(star => {
+                            if (star.dataset.value <= value) {
+                                star.classList.add('active');
+                            } else {
+                                star.classList.remove('active');
+                            }
+                        });
+                    }
+                </script>
+
+            </tr>
+        </div>
     <?php endforeach; ?>
 </table>
 <?php require __DIR__ . '/../layouts/footer.php'; ?>
