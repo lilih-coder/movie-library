@@ -1,6 +1,8 @@
 -- ===============================
 -- Languages tábla létrehozása
 -- ===============================
+-- use movies_db;
+
 DROP TABLE IF EXISTS languages;
 
 CREATE TABLE IF NOT EXISTS languages (
