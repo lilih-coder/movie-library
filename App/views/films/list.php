@@ -74,8 +74,7 @@
                 <td><?= htmlspecialchars($film['category_name']) ?></td>
                 <td><?= htmlspecialchars($film['rating_age']) ?></td>
                 <td><?= htmlspecialchars($film['language_name']) ?></td>
-                <td><?= $film['subtitle'] ? 'Igen' : 'Nem' ?></td>
-                
+                <td><?= isset($film['subtitle']) && $film['subtitle'] ? 'Igen' : 'Nem' ?></td>                
                 <td style="text-align:left;">
                     <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>">Megtekintés</a>
                     <a href="<?= BASE_URI ?>/films/<?= htmlspecialchars($film['id']) ?>/edit">Szerkesztés</a><br>

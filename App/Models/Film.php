@@ -1,18 +1,22 @@
 <?php
+
 namespace App\Models;
 
 use App\Database\Database;
 use PDO;
 
-class Film {
+class Film
+{
     private $pdo;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->pdo = Database::getInstance();
     }
 
     // Összes film lekérése
-    public function getAll($filters = []): array {
+    public function getAll($filters = []): array
+    {
         $stmt = $this->pdo->prepare("
             SELECT movies.*, studios.name AS studio_name, directors.name AS director_name, categories.name AS category_name, languages.name AS language_name
             FROM movies
@@ -30,13 +34,14 @@ class Film {
             'director_id' => $filters['director_id'],
             'category_id' => $filters['category_id'],
             'studio_id' => $filters['studio_id'],
-            'language_id' => $filters['language_id'],
+            'language_id' => $filters['language_id'] ?? null,
         ]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Egy film részlete
-    public function getById(int $id): array|false {
+    public function getById(int $id): array|false
+    {
         $stmt = $this->pdo->prepare("
             SELECT movies.*, studios.name AS studio_name, directors.name AS director_name, categories.name AS category_name, languages.name AS language_name
             FROM movies
@@ -53,7 +58,9 @@ class Film {
     // Filmet frissíteni kell minden alapján (kategória, stúdió, rendező, nyelv => public function update-ben + lekérdezésnél)
 
     // Új film létrehozása, visszaadja az új id-t vagy 0-t
-    public function create(array $data): int {
+
+    public function create(array $data): int
+    {
         $stmt = $this->pdo->prepare("
             INSERT INTO movies (title, studio_id, director_id, category_id, description)
             VALUES (:title, :studio_id, :director_id, :category_id, :description)
@@ -68,8 +75,10 @@ class Film {
         return (int) $this->pdo->lastInsertId();
     }
 
+
     // Film frissítése
-    public function update(int $id, array $data): bool {
+    public function update(int $id, array $data): bool
+    {
         $stmt = $this->pdo->prepare("
             UPDATE movies SET title = :title, studio_id = :studio_id,
             director_id = :director_id, category_id = :category_id, description = :description
@@ -88,25 +97,27 @@ class Film {
     }
 
     // Film törlése
-    public function delete(int $id): bool { 
+    public function delete(int $id): bool
+    {
         $stmt = $this->pdo->prepare("DELETE FROM movies WHERE id = :id");
         return $stmt->execute(['id' => $id]);
     }
 
-    public function getDirectors() : array {
+    public function getDirectors(): array
+    {
         $stmt = $this->pdo->query("SELECT id, name FROM directors ORDER BY name");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getCategories() : array {
+    public function getCategories(): array
+    {
         $stmt = $this->pdo->query("SELECT id, name FROM categories ORDER BY name");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getLanguages() : array {
+    public function getLanguages(): array
+    {
         $stmt = $this->pdo->query("SELECT id, name FROM languages ORDER BY name");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
- 
 }
